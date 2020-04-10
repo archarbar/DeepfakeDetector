@@ -1,0 +1,63 @@
+import matplotlib
+matplotlib.use('TkAgg')
+import matplotlib.pyplot as plt
+import numpy as np
+
+import keras
+from keras.models import Sequential
+from keras.layers import Dense
+from tensorflow.keras.models import model_from_json
+
+from PIL import Image
+
+size = 224
+
+def preprocess_img(image):
+	'''
+	This method processes the image into the correct expected shape in the model (224, 224). 
+	''' 
+	if (image.mode == 'RGB'): 
+		# Convert RGB to grayscale. 
+		image = image.convert('L')
+	image = image.resize((size, size))
+	image = np.array(image)
+	image = image.reshape(1, size, size, 1)
+	return image
+
+# def image_loader(image):
+# 	''' 
+# 	This method loads the image into a PyTorch tensor. 
+# 	'''
+# 	image = TF.to_tensor(image)
+# 	image = image.unsqueeze(0)
+# 	return image
+
+class Predictor: 
+	def __init__(self):
+		# load json and create model
+		json_file = open('model/model.json', 'r')
+		loaded_model_json = json_file.read()
+		json_file.close()
+		self.model = model_from_json(loaded_model_json)
+		# load weights into new model
+		self.model.load_weights("model/model.h5")
+		self.model.compile(loss="sparse_categorical_crossentropy",
+				optimizer="adam",
+				metrics=["accuracy"])
+
+	def predict(self, request):
+		'''
+		This method reads the file uploaded from the Flask application POST request, 
+		and performs a prediction using the loaded model. 
+		'''
+		f = request.files['image']
+		image = Image.open(f)
+		image = preprocess_img(image)
+		# image = image_loader(image)
+		prediction = self.model.predict(image)
+		if prediction[0][0] >= prediction[0][1]:
+			prediction = "FAKE"
+		else:
+			prediction = "REAL"
+		return prediction
+	
