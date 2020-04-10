@@ -21,11 +21,16 @@ Go to **localhost:5000** to access the application from the browser of your choi
 ```
 ├── README.md
 ├── app.py                      # Main code to run the flask app
-├── predictor.py                # Contains the predictor class
+├── doc                         # Various documentation for each deliverable
+│   ├── D1
+│   ├── D2
+│   └── D3
 ├── model
+│   ├── DeepfakeDetector.ipynb  # Contains the complete Jupyter notebook for training and saving the model
+│   ├── metadata.csv            # Metadata used for training the model
 │   ├── model.json              # Contains the model in json format
-│   ├── model.h5                # Contains the model weights
-│   └── DeepfakeDetector.ipynb  # Cntains the complete Jupyter notebook for training and saving the model
+│   └── model.h5                # Contains the model weights
+├── predictor.py                # Contains the predictor class
 ├── requirements.txt            # File containing packages needed to run the code
 ├── static
 │   ├── css
