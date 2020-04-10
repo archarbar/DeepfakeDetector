@@ -24,14 +24,6 @@ def preprocess_img(image):
 	image = image.reshape(1, size, size, 1)
 	return image
 
-# def image_loader(image):
-# 	''' 
-# 	This method loads the image into a PyTorch tensor. 
-# 	'''
-# 	image = TF.to_tensor(image)
-# 	image = image.unsqueeze(0)
-# 	return image
-
 class Predictor: 
 	def __init__(self):
 		# load json and create model
@@ -53,11 +45,10 @@ class Predictor:
 		f = request.files['image']
 		image = Image.open(f)
 		image = preprocess_img(image)
-		# image = image_loader(image)
 		prediction = self.model.predict(image)
 		if prediction[0][0] >= prediction[0][1]:
-			prediction = "FAKE"
+			prediction = "FAKE with a " + str(round(prediction[0][0]*100, 5)) + "% chance"
 		else:
-			prediction = "REAL"
+			prediction = "REAL with a " + str(round(prediction[0][1]*100, 5)) + "% chance"
 		return prediction
 	
