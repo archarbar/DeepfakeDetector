@@ -43,8 +43,8 @@ class Predictor:
 		and performs a prediction using the loaded model. 
 		'''
 		f = request.files['image']
-		image = Image.open(f)
-		image = preprocess_img(image)
+		src = Image.open(f)
+		image = preprocess_img(src)
 		prediction = self.model.predict(image)
 		if prediction[0][0] >= prediction[0][1]:
 			prediction = "FAKE with a " + str(round(prediction[0][0]*100, 5)) + "% chance"

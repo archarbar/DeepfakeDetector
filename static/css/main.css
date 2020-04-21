@@ -5,13 +5,19 @@
     font-family: 'Raleway', sans-serif;
 }
 
-body {
+ body {
     height: 100%;
 }
 
-h1, h2, h3, h4, h5, h6, p {
+h1, h2, h3, h4, h5, h6 {
     text-align: center;
 }
+
+p {
+    text-align: center;
+    margin: 0px;
+    padding: 0px;
+ } 
 
 .center {
     display: block;
@@ -41,15 +47,10 @@ h1, h2, h3, h4, h5, h6, p {
     margin-bottom: 1em;
 }
 
-/* RESULT TEXT */
-
-.result { 
-    padding-top: 11em;
-}
 
 /* UPLOAD FILE BUTTON */
 
-input[type="file"] {
+ input[type="file"] {
     display: none;
 }
 
@@ -60,7 +61,7 @@ input[type="file"] {
     padding: 6px 12px;
     max-width: 200px;
     cursor: pointer;
-}
+} 
 
 
 

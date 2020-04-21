@@ -2,12 +2,12 @@
 <html>
    <head>
       <!-- STYLESHEET -->
-      <link rel="stylesheet" type="text/css" href="./static/css/main.css">
+      <link rel="stylesheet" type="text/css" href="../static/css/main.css">
       <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
       <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
       <!-- JAVSCRIPT -->
-      <script src="./static/js/main.js"></script>
+      <script src="../static/js/main.js"></script>
    </head>
    <body>
       <div class="content">
@@ -18,18 +18,20 @@
             {% if prediction == None %}
             <!-- Show upload buttons if there is no prediction results yet. -->
                <img id="upload-img" class="center" 
-                    src="./static/img/upload.png" width="100">
+                    src="../static/img/upload.png" width="100">
                <label for="file-upload" class="center custom-button">
                   <i class="fa fa-upload"></i> upload your image
                   <input type="file" id="file-upload" name="image" onchange=submit() />
                </label> 
             {% else %}
-            <!-- Show prediction results. -->
-               <p class="result"> The Deepfake detector read a <b>{{ prediction }}</b> </p>
+            <!-- Show uploaded image -->
+               <img class="center" src="../static/img/input.png" length="400" width="500">
             {% endif %}
          </div>
             {% if prediction != None %}
-            <!-- Show upload button for follow up predictions. -->
+            <!-- Show prediction results and upload button for follow up predictions. -->
+               <p class="result"> The Deepfake detector read a <b>{{ prediction }}</b> </p>
+               <br>
                <label for="file-upload" class="center custom-button">
                   <i class="fa fa-upload"></i> upload another image
                   <input type="file" id="file-upload" name="image" onchange=submit() />
